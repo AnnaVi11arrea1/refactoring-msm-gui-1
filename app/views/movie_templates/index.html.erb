@@ -38,11 +38,11 @@
   </div>
 
   <div>
-    <label for="image_box">
+    <label for="Image">
       Image
     </label>
 
-    <input type="text" id="image_box" name="query_image">
+    <input type="text" id="image" name="query_image">
   </div>
 
   <div>
@@ -53,7 +53,7 @@
     <input type="text" id="director_id_box" name="query_director_id">
   </div>
 
-  <button>
+  <button type="submit">
     Create movie
   </button>
 </form>
@@ -86,38 +86,31 @@
     </th>
   </tr>
 
-  <% @list_of_movies.each do |movie| %>
+  <% @list_of_movies.each do |a_movie| %>
   <tr>
     <td>
-      <%= movie.id %>
+      <%= a_movie.id %>
     </td>
 
     <td>
-      <img src="<%= movie.image %>" style="width:250px;">
+      <img src="<%= a_movie.image %>" style="width:250px;">
     </td>
 
     <td>
-      <%= movie.title %>
+      <%= a_movie.title %>
     </td>
 
     <td>
-      <%= movie.year %>
+      <%= a_movie.year %>
     </td>
 
     <td>
-      <% matching_directors = Director.where({ :id => movie.director_id }) %>
 
-      <% the_director = matching_directors.at(0) %>
-
-      <% if the_director != nil %>
-        <%= the_director.name %>
-      <% else %>
-        Uh oh! We weren't able to find a director for this movie.
-      <% end %>
+      <%= a_movie.director&.name%>
     </td>
 
     <td>
-      <a href="/movies/<%= movie.id %>">
+      <a href="/movies/<%= a_movie.id %>">
         Show details
       </a>
     </td>
